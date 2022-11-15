@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverUrl = "http://localhost:3001/";
+const serverUrl = "https://room-api-party.herokuapp.com/";
 
 const api = axios.create({
   baseURL: serverUrl,

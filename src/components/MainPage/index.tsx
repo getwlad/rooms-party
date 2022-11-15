@@ -4,7 +4,7 @@ import RoomPage from "../RoomPage";
 import { Section, Button, Input, Content } from "./style";
 import { toast } from "react-toastify";
 import * as io from "socket.io-client";
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://room-api-party.herokuapp.com/");
 
 const MainPage = (props: React.PropsWithChildren) => {
   const [user, setUser] = useState("");
