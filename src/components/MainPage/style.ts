@@ -31,13 +31,14 @@ const adjusts = `
 
 export const Button = styled.button`
   width: 200px;
-  background-color: #383f45;
+
   color: #fff;
   cursor: pointer;
   margin: 5px;
   ${adjusts}
+  background-color: #006644;
   &:hover {
-    background-color: #313f45;
+    background-color: #006044;
   }
 `;
 
