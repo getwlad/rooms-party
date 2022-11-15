@@ -58,6 +58,13 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
           placeholder="Cole aqui a URL do video"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          onKeyUp={(e) => {
+            if (e.key === "Enter") {
+              setVideo(url);
+            } else if (e.key === "Escape") {
+              setUrl("");
+            }
+          }}
         />
         <Button onClick={(e) => setVideo(url)}>Carregar</Button>
       </Div>

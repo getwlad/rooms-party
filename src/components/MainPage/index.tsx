@@ -14,6 +14,12 @@ const MainPage = (props: React.PropsWithChildren) => {
   const [roomVideoId, setRoomVideoId] = useState("");
   const [logged, setLogged] = useState(false);
 
+  const checkKeys = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      entrarNumaSala();
+    }
+  };
+
   const entrarNumaSala = async () => {
     if (user === "") {
       toast.error("Preencha um nome de usuário");
@@ -49,7 +55,14 @@ const MainPage = (props: React.PropsWithChildren) => {
             <Input
               type="text"
               placeholder="Digite seu nome"
+              value={user}
               onChange={(e) => setUser(e.target.value)}
+              onKeyUp={(e) => {
+                checkKeys(e);
+                if (e.key === "Escape") {
+                  setUser("");
+                }
+              }}
             />
           </Content>
           <Content>
@@ -59,6 +72,12 @@ const MainPage = (props: React.PropsWithChildren) => {
               placeholder="Digite o nome da sala"
               value={room}
               onChange={(e) => setRoom(e.target.value)}
+              onKeyUp={(e) => {
+                checkKeys(e);
+                if (e.key === "Escape") {
+                  setUser("");
+                }
+              }}
             />
             <Button onClick={(e) => entrarNumaSala()}>Entrar</Button>
           </Content>

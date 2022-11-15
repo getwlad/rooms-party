@@ -17,7 +17,8 @@ export const MessageLog = styled.div`
   border-radius: 5px;
   width: 100%;
   height: 50%;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const ListLogs = styled.ul`
@@ -32,7 +33,7 @@ export const MessageItem = styled.li`
   width: 90%;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  box-shadow: 0px 0px 6px #b2b2b2;
   border-radius: 5px;
   margin: 5px;
   padding: 4px;
@@ -59,6 +60,8 @@ export const TextArea = styled.textarea`
   padding: 5px;
   border: none;
   outline: none;
+
+  transition: all -3s ease-in-out;
   &:focus {
     outline: 1.5px solid #36b67e;
   }
@@ -67,4 +70,9 @@ export const TextArea = styled.textarea`
 export const Button = styled.button`
   margin-top: 5px;
   cursor: pointer;
+  color: #fff;
+  background-color: #006644;
+  &:hover {
+    background-color: #006044;
+  }
 `;

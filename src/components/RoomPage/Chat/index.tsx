@@ -32,6 +32,13 @@ const Chat = ({ socket, room, username }: any) => {
     return () => socket.off("receive_message", handler);
   }, []);
 
+  useEffect(() => {
+    const messageLogEl = document.getElementById("messageLog");
+    if (messageLogEl) {
+      messageLogEl.scrollTop += 999;
+    }
+  }, [messageList]);
+
   const sendMessage = async () => {
     if (currentMessage === "") {
       return;
@@ -56,7 +63,7 @@ const Chat = ({ socket, room, username }: any) => {
   };
   return (
     <Section>
-      <MessageLog>
+      <MessageLog id="messageLog">
         <ListLogs>
           {messageList?.map((messageContent) => {
             return (
@@ -74,6 +81,13 @@ const Chat = ({ socket, room, username }: any) => {
         placeholder="Digite sua mensagem"
         onChange={(e) => setCurrentMessage(e.target.value)}
         value={currentMessage}
+        onKeyUp={(e) => {
+          if (e.key === "Enter") {
+            sendMessage();
+          } else if (e.key === "Escape") {
+            setCurrentMessage("");
+          }
+        }}
       />
       <Button onClick={(e) => sendMessage()}>Enviar</Button>
     </Section>

@@ -20,6 +20,7 @@ export const H1 = styled.h2`
 
 export const Button = styled.button`
   width: 150px;
+  height: 40px;
   cursor: pointer;
   margin: 2px;
   color: #fff;
@@ -31,11 +32,12 @@ export const Button = styled.button`
 
 export const Input = styled.input`
   width: 60%;
-  height: 32px;
+  height: 40px;
   font-size: 1rem;
   margin: 2px;
   padding: 5px;
   outline: none;
+
   &:focus {
     outline: 1.5px solid #36b67e;
   }
