@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//Url de conexão  com o socket, caso a url abaixo não funcione, você pode usar esta api e roda-la localmente: https://github.com/getwlad/api-rooms-party
 const serverUrl = "https://room-api-party.herokuapp.com/";
 
 const api = axios.create({

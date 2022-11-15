@@ -17,9 +17,12 @@ interface messageData {
   time: string;
 }
 const Chat = ({ socket, room, username }: any) => {
+  //Lista de mensagens enviadas
   const [messageList, setMessageList] = useState<messageData[]>();
+  //Mensagem do usuário
   const [currentMessage, setCurrentMessage] = useState("");
 
+  //Atualiza a lista de mensagens
   useEffect(() => {
     const handler = (data: messageData) => {
       setMessageList((current) => {
@@ -28,10 +31,12 @@ const Chat = ({ socket, room, username }: any) => {
         return [...current, data];
       });
     };
+    //Sempre que uma nova mensagem é recebida a lista é atualizada
     socket.on("receive_message", handler);
     return () => socket.off("receive_message", handler);
   }, []);
 
+  //Sempre que uma alteração é feita na lista de mensagens o scroll da área do chat abaixa até o final
   useEffect(() => {
     const messageLogEl = document.getElementById("messageLog");
     if (messageLogEl) {
@@ -39,6 +44,7 @@ const Chat = ({ socket, room, username }: any) => {
     }
   }, [messageList]);
 
+  //Função de envio de mensagem
   const sendMessage = async () => {
     if (currentMessage === "") {
       return;
@@ -52,8 +58,10 @@ const Chat = ({ socket, room, username }: any) => {
         ":" +
         new Date(Date.now()).getMinutes(),
     };
-
+    //Envio de mensagem
     await socket.emit("send_message", messageData);
+
+    //Atualização da lista de mensagens para o usuário atual
     setMessageList((current) => {
       if (!current) return [messageData];
 

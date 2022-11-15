@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Header } from "./App.style";
+//Toast para notificações
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
@@ -25,6 +26,7 @@ function App() {
       </Header>
 
       <Routes />
+
       <Normalize />
     </Container>
   );

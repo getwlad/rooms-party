@@ -15,9 +15,13 @@ import Chat from "./Chat";
 import RoomDetails from "./RoomDetails";
 
 const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
+  //Url do video a ser carregado
   const [url, setUrl] = useState("");
+
+  //Id do video carregada da url
   const [videoId, setVideoId] = useState<string | null>(roomVideoId);
 
+  //Capturando evento de quando algum usuário inserir algum video, este também seja renderizado na janela atual.
   useEffect(() => {
     const handler = (data: any) => {
       setVideoId(data);
@@ -26,6 +30,7 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
     return () => socket.off("receive_videoid", handler);
   }, []);
 
+  //Função pra obter a id do video pela url
   const getId = (url: string) => {
     const regExp =
       /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -34,6 +39,7 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
     return match && match[2].length === 11 ? match[2] : null;
   };
 
+  //Função para definir o video a ser executado
   const setVideo = async (url: string) => {
     if (url === "") {
       toast.error("Preencha o campo com a URL");
@@ -46,6 +52,7 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
     }
     setVideoId(id);
     const data = { room, id };
+    //Emite o evento para salvar e notificar os usuários que o video foi definido
     await socket.emit("set_video", data);
   };
 
