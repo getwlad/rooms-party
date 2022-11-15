@@ -58,6 +58,10 @@ export const TextArea = styled.textarea`
   margin-top: 5px;
   padding: 5px;
   border: none;
+  outline: none;
+  &:focus {
+    outline: 1.5px solid #36b67e;
+  }
 `;
 
 export const Button = styled.button`
