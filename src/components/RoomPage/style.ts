@@ -73,8 +73,13 @@ export const Main = styled.div`
   flex-direction: column;
 `;
 
-export const Iframe = styled.iframe`
-  margin: 5px;
+export const VideoDiv = styled.div`
+  width: 70%;
+  height: 92%;
+  background-color: #bdbdbd;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-shadow: 0px 0px 6px #bdbdbd;
   @media screen and (max-width: 728px) {
     width: 90%;
     height: 100%;

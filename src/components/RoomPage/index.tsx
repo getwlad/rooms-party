@@ -8,7 +8,7 @@ import {
   Div,
   Section,
   Main,
-  Iframe,
+  VideoDiv,
 } from "./style";
 import { toast } from "react-toastify";
 import Chat from "./Chat";
@@ -78,20 +78,23 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
 
       <Main>
         <Content>
-          {videoId ? (
-            <Iframe
-              id="video"
-              width="70%"
-              height="100%"
-              src={`https://www.youtube.com/embed/${videoId}?&autoplay=1`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              frameBorder="0"
-            ></Iframe>
-          ) : (
-            <></>
-          )}
+          <VideoDiv>
+            {videoId ? (
+              <iframe
+                id="video"
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${videoId}?&autoplay=1`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                frameBorder="0"
+              ></iframe>
+            ) : (
+              <></>
+            )}
+          </VideoDiv>
+
           <Chat socket={socket} room={room} username={username} />
         </Content>
         <RoomDetails room={room} userData={userData} socket={socket} />
