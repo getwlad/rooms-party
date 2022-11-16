@@ -18,6 +18,7 @@ Você pode conferir este projeto rodando em: [Rooms-party](https://rooms-party.v
 ## Instalação
 
 Utilize o Rooms-party localmente com o npm.
+**Para uso destes comandos é necessário ter o Node JS e git instalados**
 
 ```bash
   # Faça o download do código pelo terminal:

@@ -9,8 +9,11 @@ import {
   Section,
   Main,
   VideoDiv,
+<<<<<<< HEAD
   ButtonSync,
   AreaButton,
+=======
+>>>>>>> 472832946168083b8eb1289770823a2c521236f1
 } from "./style";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
@@ -101,6 +104,7 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
         <Content>
           <VideoDiv>
             {videoId ? (
+<<<<<<< HEAD
               <>
                 <Plyr
                   height={"100%"}
@@ -133,6 +137,18 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
                   </ButtonSync>
                 </AreaButton>
               </>
+=======
+              <iframe
+                id="video"
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${videoId}?&autoplay=1`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                frameBorder="0"
+              ></iframe>
+>>>>>>> 472832946168083b8eb1289770823a2c521236f1
             ) : (
               <></>
             )}
