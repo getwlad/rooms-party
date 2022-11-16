@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
   H1,
@@ -8,13 +8,18 @@ import {
   Div,
   Section,
   Main,
-  Iframe,
+  VideoDiv,
+  ButtonSync,
+  AreaButton,
 } from "./style";
+import Plyr from "plyr-react";
+import "plyr-react/plyr.css";
 import { toast } from "react-toastify";
 import Chat from "./Chat";
 import RoomDetails from "./RoomDetails";
 
 const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
+  // const [player, setPlayer] = useState(new Plyr("#player"));
   //Url do video a ser carregado
   const [url, setUrl] = useState("");
 
@@ -30,6 +35,20 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
     return () => socket.off("receive_videoid", handler);
   }, []);
 
+  useEffect(() => {
+    const handler = (data: any) => {
+      if (ref.current) {
+        const player: HTMLVideoElement = ref.current["plyr"];
+        player.currentTime = data;
+        if (player.paused) {
+          player.play();
+          player.muted = false;
+        }
+      }
+    };
+    socket.on("updateVideoTime", handler);
+    return () => socket.off("updateVideoTime", handler);
+  }, []);
   //Função pra obter a id do video pela url
   const getId = (url: string) => {
     const regExp =
@@ -56,6 +75,8 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
     await socket.emit("set_video", data);
   };
 
+  const ref = useRef(null);
+
   return (
     <Section>
       <Div>
@@ -78,20 +99,45 @@ const RoomPage = ({ socket, username, room, userData, roomVideoId }: any) => {
 
       <Main>
         <Content>
-          {videoId ? (
-            <Iframe
-              id="video"
-              width="70%"
-              height="100%"
-              src={`https://www.youtube.com/embed/${videoId}?&autoplay=1`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              frameBorder="0"
-            ></Iframe>
-          ) : (
-            <></>
-          )}
+          <VideoDiv>
+            {videoId ? (
+              <>
+                <Plyr
+                  height={"100%"}
+                  width={"100%"}
+                  ref={ref}
+                  source={{
+                    type: "video",
+                    sources: [
+                      {
+                        src: videoId!,
+                        provider: "youtube",
+                      },
+                    ],
+                  }}
+                />
+                <AreaButton>
+                  <ButtonSync
+                    onClick={(e) => {
+                      if (ref.current) {
+                        const player: HTMLVideoElement = ref.current["plyr"];
+                        if (player.paused) {
+                          player.play();
+                        }
+                        const data = { room, time: player.currentTime };
+                        socket.emit("played_video", data);
+                      }
+                    }}
+                  >
+                    Sincronizar todos com meu video
+                  </ButtonSync>
+                </AreaButton>
+              </>
+            ) : (
+              <></>
+            )}
+          </VideoDiv>
+
           <Chat socket={socket} room={room} username={username} />
         </Content>
         <RoomDetails room={room} userData={userData} socket={socket} />

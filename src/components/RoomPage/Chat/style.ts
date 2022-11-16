@@ -6,7 +6,7 @@ export const Section = styled.div`
   height: 800px;
   margin: 5px 5px;
   width: calc(100vw - 80%);
-  @media screen and (max-width: 728px) {
+  @media screen and (max-width: 1000px) {
     width: 90%;
     height: 70%;
   }
@@ -16,9 +16,12 @@ export const MessageLog = styled.div`
   background-color: #fafafa;
   border-radius: 5px;
   width: 100%;
-  height: 50%;
+  height: 65%;
   overflow-y: scroll;
   overflow-x: hidden;
+  @media screen and (max-width: 1000px) {
+    height: 300px;
+  }
 `;
 
 export const ListLogs = styled.ul`

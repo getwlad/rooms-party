@@ -48,10 +48,10 @@ export const Input = styled.input`
 
 export const Content = styled.div`
   width: 100%;
-  height: 900px;
+  height: 80%;
   display: flex;
   justify-content: center;
-  @media screen and (max-width: 728px) {
+  @media screen and (max-width: 1000px) {
     flex-direction: column;
     align-items: center;
     height: 900px;
@@ -73,10 +73,39 @@ export const Main = styled.div`
   flex-direction: column;
 `;
 
-export const Iframe = styled.iframe`
-  margin: 5px;
-  @media screen and (max-width: 728px) {
+export const VideoDiv = styled.div`
+  width: 70%;
+  height: 65%;
+  background-color: #bdbdbd;
+  border-radius: 5px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 6px #bdbdbd;
+
+  @media screen and (max-width: 1000px) {
     width: 90%;
-    height: 100%;
+    height: 300px;
   }
+`;
+
+export const ButtonSync = styled.button`
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  margin: 2px;
+  color: #fff;
+  background-color: #006644;
+  &:hover {
+    background-color: #006044;
+  }
+`;
+
+export const AreaButton = styled.div`
+  background-color: #1c1e21;
+  align-self: center;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
 `;
