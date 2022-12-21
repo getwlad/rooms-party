@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import * as io from "socket.io-client";
 
 //Url de conexão  com o socket, caso a url abaixo não funcione, você pode usar esta api e roda-la localmente: https://github.com/getwlad/api-rooms-party
-const socket = io.connect("https://room-api-party.herokuapp.com/");
+const socket = io.connect("https://api-rooms-party-production.up.railway.app/");
 
 const MainPage = (props: React.PropsWithChildren) => {
   //Nome do usuário que vai efetuar a conexão
